@@ -12,23 +12,23 @@ var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
 var testRootDirectory = pathPackage.join(
-	filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(),
-	filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
+	filesystemLibrary._OLSKFilesystemAbsolutePathWorkspaceTestingDirectory(),
+	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
-describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesystemInputDataIsRealDirectoryPath() {
+describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	it('returns null if parameter not filesystem path', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(''), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(''), false);
 	});
 
 	it('returns null if directory path does not exist', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
 	});
 
 	it('returns null if path not directory', function() {
@@ -38,21 +38,21 @@ describe('ROCOFilesystemInputDataIsRealDirectoryPath', function testROCOFilesyst
 		);
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
 	});
 
 	it('returns true if directory exists', function() {
 		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
 	});
 
 });
 
-describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInputDataIsRealFilePath() {
+describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInputDataIsRealFilePath() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
@@ -62,31 +62,31 @@ describe('ROCOFilesystemInputDataIsRealFilePath', function testROCOFilesystemInp
 	);
 
 	it('returns null if parameter not filesystem path', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(''), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(''), false);
 	});
 
 	it('returns null if file path does not exist', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(fileFullPath), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), false);
 	});
 
 	it('returns null if path not file', function() {
 		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(testRootDirectory), false);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(testRootDirectory), false);
 	});
 
 	it('returns true if file exists', function() {
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(fileFullPath), true);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), true);
 	});
 
 });
 
-describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFilesystemHelpCreateDirectoryIfDoesNotExist() {
+describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFilesystemHelpCreateDirectoryIfDoesNotExist() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
@@ -94,7 +94,7 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), true);
 	});
 
@@ -106,17 +106,17 @@ describe('ROCOFilesystemHelpCreateDirectoryIfDoesNotExist', function testROCOFil
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 	});
 
 });
 
-describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesystemHelpDeleteDirectoryRecursive() {
+describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesystemHelpDeleteDirectoryRecursive() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 		mkdirpPackage.sync(testRootDirectory);
 	});
@@ -128,7 +128,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 		);
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(directoryFullPath), 0);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(directoryFullPath), 0);
 	});
 
 	it('returns 0 if path not directory', function() {
@@ -139,7 +139,7 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
 
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
 	});
 
 	it('returns 1 and deletes directory', function() {
@@ -157,126 +157,126 @@ describe('ROCOFilesystemHelpDeleteDirectoryRecursive', function testROCOFilesyst
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
 		assert.strictEqual(fsPackage.existsSync(testRootDirectory), false);
 	});
 
 });
 
-describe('ROCOFilesystemAppDirectoryName', function testROCOFilesystemAppDirectoryName() {
+describe('OLSKFilesystemAppDirectoryName', function testOLSKFilesystemAppDirectoryName() {
 
 	it('returns app directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemAppDirectoryName(), 'os-app');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'os-app');
 	});
 
 });
 
-describe('ROCOFilesystemCacheDirectoryName', function testROCOFilesystemCacheDirectoryName() {
+describe('OLSKFilesystemCacheDirectoryName', function testOLSKFilesystemCacheDirectoryName() {
 
 	it('returns cache directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemCacheDirectoryName(), 'os-cache');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemCacheDirectoryName(), 'os-cache');
 	});
 
 });
 
-describe('ROCOFilesystemDataDirectoryName', function testROCOFilesystemDataDirectoryName() {
+describe('OLSKFilesystemDataDirectoryName', function testOLSKFilesystemDataDirectoryName() {
 
 	it('returns data directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemDataDirectoryName(), 'os-data');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemDataDirectoryName(), 'os-data');
 	});
 
 });
 
-describe('ROCOFilesystemPublicDirectoryName', function testROCOFilesystemPublicDirectoryName() {
+describe('OLSKFilesystemPublicDirectoryName', function testOLSKFilesystemPublicDirectoryName() {
 
 	it('returns public directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemPublicDirectoryName(), 'os-public');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemPublicDirectoryName(), 'os-public');
 	});
 
 });
 
-describe('ROCOFilesystemSystemDirectoryName', function testROCOFilesystemSystemDirectoryName() {
+describe('OLSKFilesystemSystemDirectoryName', function testOLSKFilesystemSystemDirectoryName() {
 
 	it('returns system directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSystemDirectoryName(), 'os-system');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemSystemDirectoryName(), 'os-system');
 	});
 
 });
 
-describe('ROCOFilesystemWorkspaceTestingDirectoryName', function testROCOFilesystemWorkspaceTestingDirectoryName() {
+describe('OLSKFilesystemWorkspaceTestingDirectoryName', function testOLSKFilesystemWorkspaceTestingDirectoryName() {
 
 	it('returns workspace testing directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName(), 'os-workspace-testing');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName(), 'os-workspace-testing');
 	});
 
 });
 
-describe('ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor', function testROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor() {
+describe('OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor', function testOLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor() {
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
-			filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor(null);
-		}, /ROCOErrorInputInvalid/);
+			filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor(null);
+		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('throws error if param1 empty', function() {
 		assert.throws(function() {
-			filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('');
-		}, /ROCOErrorInputInvalid/);
+			filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('');
+		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('returns subfolderName', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
 	});
 
 });
 
-describe('ROCOFilesystemLaunchFileName', function testROCOFilesystemLaunchFileName() {
+describe('OLSKFilesystemLaunchFileName', function testOLSKFilesystemLaunchFileName() {
 
 	it('returns launch file name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemLaunchFileName(), 'os-launch.js');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemLaunchFileName(), 'os-launch.js');
 	});
 
 });
 
-describe('_ROCOFilesystemAbsolutePathRootDirectory', function test_ROCOFilesystemAbsolutePathRootDirectory() {
+describe('_OLSKFilesystemAbsolutePathRootDirectory', function test_OLSKFilesystemAbsolutePathRootDirectory() {
 
 	it('returns app directory absolutePath', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory(), filesystemLibrary.ROCOFilesystemLaunchFileName())), true);
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary._OLSKFilesystemAbsolutePathRootDirectory(), filesystemLibrary.OLSKFilesystemLaunchFileName())), true);
 	});
 
 });
 
-describe('_ROCOFilesystemAbsolutePathWorkspaceTestingDirectory', function test_ROCOFilesystemAbsolutePathWorkspaceTestingDirectory() {
+describe('_OLSKFilesystemAbsolutePathWorkspaceTestingDirectory', function test_OLSKFilesystemAbsolutePathWorkspaceTestingDirectory() {
 
 	it('returns workspace testing absolutePath', function() {
-		assert.strictEqual(filesystemLibrary._ROCOFilesystemAbsolutePathWorkspaceTestingDirectory(), pathPackage.join(filesystemLibrary._ROCOFilesystemAbsolutePathRootDirectory(), filesystemLibrary.ROCOFilesystemWorkspaceTestingDirectoryName()));
+		assert.strictEqual(filesystemLibrary._OLSKFilesystemAbsolutePathWorkspaceTestingDirectory(), pathPackage.join(filesystemLibrary._OLSKFilesystemAbsolutePathRootDirectory(), filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });
 
-describe('ROCOFilesystemSharedFileExtensionJSON', function testROCOFilesystemSharedFileExtensionJSON() {
+describe('OLSKFilesystemSharedFileExtensionJSON', function testOLSKFilesystemSharedFileExtensionJSON() {
 
 	it('returns json', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSharedFileExtensionJSON(), 'json');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemSharedFileExtensionJSON(), 'json');
 	});
 
 });
 
-describe('ROCOFilesystemSharedFileExtensionYAML', function testROCOFilesystemSharedFileExtensionYAML() {
+describe('OLSKFilesystemSharedFileExtensionYAML', function testOLSKFilesystemSharedFileExtensionYAML() {
 
 	it('returns yaml', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemSharedFileExtensionYAML(), 'yaml');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemSharedFileExtensionYAML(), 'yaml');
 	});
 
 });
 
-describe('ROCOFilesystemDefaultTextEncoding', function testROCOFilesystemDefaultTextEncoding() {
+describe('OLSKFilesystemDefaultTextEncoding', function testOLSKFilesystemDefaultTextEncoding() {
 
 	it('returns system directory name', function() {
-		assert.strictEqual(filesystemLibrary.ROCOFilesystemDefaultTextEncoding(), 'utf8');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemDefaultTextEncoding(), 'utf8');
 	});
 
 });
