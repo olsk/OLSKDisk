@@ -10,10 +10,10 @@ var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-var filesystemLibrary = require('./main');
+var filesystemLibrary = require('OLSKFilesystem');
 
 var testRootDirectory = pathPackage.join(
-	__dirname,
+	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName(),
 	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
