@@ -118,21 +118,6 @@ exports.OLSKFilesystemLaunchFileName = function() {
 	return 'os-launch.js';
 };
 
-//_ _OLSKFilesystemAbsolutePathRootDirectory
-
-exports._OLSKFilesystemAbsolutePathRootDirectory = function() {
-	return pathPackage.join(
-		__dirname,
-		'/../../../'
-	);
-};
-
-//_ _OLSKFilesystemAbsolutePathWorkspaceTestingDirectory
-
-exports._OLSKFilesystemAbsolutePathWorkspaceTestingDirectory = function() {
-	return pathPackage.join(exports._OLSKFilesystemAbsolutePathRootDirectory(), exports.OLSKFilesystemWorkspaceTestingDirectoryName());
-};
-
 //_ OLSKFilesystemSharedFileExtensionJSON
 
 exports.OLSKFilesystemSharedFileExtensionJSON = function() {

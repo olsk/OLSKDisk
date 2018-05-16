@@ -6,13 +6,14 @@
 
 var assert = require('assert');
 
-var filesystemLibrary = require('./main');
 var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
+var filesystemLibrary = require('./main');
+
 var testRootDirectory = pathPackage.join(
-	filesystemLibrary._OLSKFilesystemAbsolutePathWorkspaceTestingDirectory(),
+	__dirname,
 	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
@@ -237,22 +238,6 @@ describe('OLSKFilesystemLaunchFileName', function testOLSKFilesystemLaunchFileNa
 
 	it('returns launch file name', function() {
 		assert.strictEqual(filesystemLibrary.OLSKFilesystemLaunchFileName(), 'os-launch.js');
-	});
-
-});
-
-describe('_OLSKFilesystemAbsolutePathRootDirectory', function test_OLSKFilesystemAbsolutePathRootDirectory() {
-
-	it('returns app directory absolutePath', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(pathPackage.join(filesystemLibrary._OLSKFilesystemAbsolutePathRootDirectory(), filesystemLibrary.OLSKFilesystemLaunchFileName())), true);
-	});
-
-});
-
-describe('_OLSKFilesystemAbsolutePathWorkspaceTestingDirectory', function test_OLSKFilesystemAbsolutePathWorkspaceTestingDirectory() {
-
-	it('returns workspace testing absolutePath', function() {
-		assert.strictEqual(filesystemLibrary._OLSKFilesystemAbsolutePathWorkspaceTestingDirectory(), pathPackage.join(filesystemLibrary._OLSKFilesystemAbsolutePathRootDirectory(), filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName()));
 	});
 
 });
