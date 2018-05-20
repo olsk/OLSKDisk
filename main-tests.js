@@ -249,3 +249,85 @@ describe('OLSKFilesystemDefaultTextEncoding', function testOLSKFilesystemDefault
 	});
 
 });
+
+describe('OLSKFilesystemSafeBasenameFor', function testOLSKFilesystemSafeBasenameFor() {
+
+	it('throws if not string', function() {
+		assert.throws(function() {
+			filesystemLibrary.OLSKFilesystemSafeBasenameFor(null);
+		});
+	});
+
+	it('returns identical if no illegal characters', function() {
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha'), 'alpha');
+	});
+
+	it('returns without dot', function() {
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha.bravo'), 'alpha bravo');
+	});
+    
+  it('returns without Comma', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha,bravo"), "alpha bravo");
+  });
+  
+  it('returns without Semicolon', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha;bravo"), "alpha bravo");
+  });
+  
+  it('returns without Colon', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha:bravo"), "alpha bravo");
+  });
+  
+  it('returns without Star', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha*bravo"), "alpha bravo");
+  });
+  
+  it('returns without Question', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha?bravo"), "alpha bravo");
+  });
+  
+  it('returns without Pipeline', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha|bravo"), "alpha bravo");
+  });
+  
+  it('returns without Underscore', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha_bravo"), "alpha bravo");
+  });
+  
+  it('returns without GreaterLessThan', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha<bravo>charlie"), "alpha bravo charlie");
+  });
+  
+  it('returns without Slashes', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha/bravo\\charlie"), "alpha bravo charlie");
+  });
+  
+  it('returns without Quotes', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("\"alpha\" 'bravo' “charlie” ‘delta’ «echo»"), "alpha bravo charlie delta echo");
+  });
+  
+  it('returns without Whitespace', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha\nbravo\tcharlie"), "alpha bravo charlie");
+  });
+  
+  it('returns without DisallowedMultiple', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha \n\t bravo"), "alpha bravo");
+  });
+  
+  it('returns without DisallowedEnds', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor(" \n\t alpha bravo \t\n "), "alpha bravo");
+  });
+  
+  it('returns without Dashes', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("alpha-bravo–charlie—delta"), "alpha-bravo–charlie—delta");
+  });
+  
+  it('returns without Brackets', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("(alpha) [bravo] {charlie}"), "(alpha) [bravo] {charlie}");
+  });
+  
+  it('returns without International', function() {
+  	assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor("àlpha niño 縦書き 😀 € $"), "àlpha niño 縦書き 😀 € $");
+  });
+
+});

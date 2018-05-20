@@ -122,3 +122,15 @@ exports.OLSKFilesystemLaunchFileName = function() {
 exports.OLSKFilesystemDefaultTextEncoding = function() {
 	return 'utf8';
 };
+
+//_ OLSKFilesystemSafeBasenameFor
+
+exports.OLSKFilesystemSafeBasenameFor = function(inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
+	return inputData.replace(/[\.,;:\*\?\|_<>\\\/\"\'\“\”\‘\’\«\»]/g, ' ').split(/\s/).filter(function(e) {
+		return e.trim() !== '';
+	}).join(' ');
+};
