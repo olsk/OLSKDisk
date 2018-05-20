@@ -4,7 +4,6 @@
  * MIT Licensed
  */
 
-var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
