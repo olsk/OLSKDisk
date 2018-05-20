@@ -117,12 +117,6 @@ exports.OLSKFilesystemLaunchFileName = function() {
 	return 'os-launch.js';
 };
 
-//_ OLSKFilesystemSharedFileExtensionJSON
-
-exports.OLSKFilesystemSharedFileExtensionJSON = function() {
-	return 'json';
-};
-
 //_ OLSKFilesystemDefaultTextEncoding
 
 exports.OLSKFilesystemDefaultTextEncoding = function() {

@@ -242,14 +242,6 @@ describe('OLSKFilesystemLaunchFileName', function testOLSKFilesystemLaunchFileNa
 
 });
 
-describe('OLSKFilesystemSharedFileExtensionJSON', function testOLSKFilesystemSharedFileExtensionJSON() {
-
-	it('returns json', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSharedFileExtensionJSON(), 'json');
-	});
-
-});
-
 describe('OLSKFilesystemDefaultTextEncoding', function testOLSKFilesystemDefaultTextEncoding() {
 
 	it('returns system directory name', function() {
