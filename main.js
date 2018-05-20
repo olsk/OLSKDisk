@@ -124,12 +124,6 @@ exports.OLSKFilesystemSharedFileExtensionJSON = function() {
 	return 'json';
 };
 
-//_ OLSKFilesystemSharedFileExtensionYAML
-
-exports.OLSKFilesystemSharedFileExtensionYAML = function() {
-	return 'yaml';
-};
-
 //_ OLSKFilesystemDefaultTextEncoding
 
 exports.OLSKFilesystemDefaultTextEncoding = function() {

@@ -250,14 +250,6 @@ describe('OLSKFilesystemSharedFileExtensionJSON', function testOLSKFilesystemSha
 
 });
 
-describe('OLSKFilesystemSharedFileExtensionYAML', function testOLSKFilesystemSharedFileExtensionYAML() {
-
-	it('returns yaml', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSharedFileExtensionYAML(), 'yaml');
-	});
-
-});
-
 describe('OLSKFilesystemDefaultTextEncoding', function testOLSKFilesystemDefaultTextEncoding() {
 
 	it('returns system directory name', function() {
