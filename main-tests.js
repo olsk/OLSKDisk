@@ -10,7 +10,7 @@ var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-var filesystemLibrary = require('OLSKFilesystem');
+var filesystemLibrary = require('./main');
 
 var testRootDirectory = pathPackage.join(
 	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName(),
