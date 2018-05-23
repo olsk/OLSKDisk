@@ -1,5 +1,5 @@
 /*!
- * OldSkool
+ * OLSKFilesystem
  * Copyright(c) 2018 Rosano Coutinho
  * MIT Licensed
  */
