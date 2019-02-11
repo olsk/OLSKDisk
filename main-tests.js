@@ -197,14 +197,6 @@ describe('OLSKFilesystemPublicDirectoryName', function testOLSKFilesystemPublicD
 
 });
 
-describe('OLSKFilesystemTestingDirectoryName', function testOLSKFilesystemTestingDirectoryName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKFilesystemTestingDirectoryName(), 'os-testing');
-	});
-
-});
-
 describe('OLSKFilesystemWorkspaceTestingDirectoryName', function testOLSKFilesystemWorkspaceTestingDirectoryName() {
 
 	it('returns constant', function() {
