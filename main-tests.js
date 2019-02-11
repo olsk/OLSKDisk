@@ -10,26 +10,26 @@ var pathPackage = require('path');
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-var filesystemLibrary = require('./main');
+const mainModule = require('./main');
 
 var testRootDirectory = pathPackage.join(
-	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName(),
-	filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
+	mainModule.OLSKFilesystemWorkspaceTestingDirectoryName(),
+	mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
 describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
 	it('returns null if parameter not filesystem path', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(''), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(''), false);
 	});
 
 	it('returns null if directory path does not exist', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
 	});
 
 	it('returns null if path not directory', function() {
@@ -39,12 +39,12 @@ describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesyst
 		);
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
 	});
 
 	it('returns true if directory exists', function() {
 		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
 	});
 
 });
@@ -53,7 +53,7 @@ describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInp
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
@@ -63,22 +63,22 @@ describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInp
 	);
 
 	it('returns null if parameter not filesystem path', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(''), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(''), false);
 	});
 
 	it('returns null if file path does not exist', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), false);
 	});
 
 	it('returns null if path not file', function() {
 		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(testRootDirectory), false);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(testRootDirectory), false);
 	});
 
 	it('returns true if file exists', function() {
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), true);
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), true);
 	});
 
 });
@@ -87,7 +87,7 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 	});
 
@@ -95,7 +95,7 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), true);
 	});
 
@@ -107,7 +107,7 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 	});
 
@@ -117,7 +117,7 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(testRootDirectory)) {
-			filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
 		}
 		mkdirpPackage.sync(testRootDirectory);
 	});
@@ -129,7 +129,7 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 		);
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(directoryFullPath), 0);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(directoryFullPath), 0);
 	});
 
 	it('returns 0 if path not directory', function() {
@@ -140,7 +140,7 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 		mkdirpPackage.sync(testRootDirectory);
 		fsPackage.writeFileSync(fileFullPath, '');
 
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
 	});
 
 	it('returns 1 and deletes directory', function() {
@@ -158,7 +158,7 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
 		assert.strictEqual(fsPackage.existsSync(testRootDirectory), false);
 	});
@@ -167,48 +167,48 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 
 describe('OLSKFilesystemAppDirectoryName', function testOLSKFilesystemAppDirectoryName() {
 
-	it('returns app directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemAppDirectoryName(), 'os-app');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemAppDirectoryName(), 'os-app');
 	});
 
 });
 
 describe('OLSKFilesystemCacheDirectoryName', function testOLSKFilesystemCacheDirectoryName() {
 
-	it('returns cache directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemCacheDirectoryName(), 'os-cache');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemCacheDirectoryName(), 'os-cache');
 	});
 
 });
 
 describe('OLSKFilesystemDataDirectoryName', function testOLSKFilesystemDataDirectoryName() {
 
-	it('returns data directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemDataDirectoryName(), 'os-data');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemDataDirectoryName(), 'os-data');
 	});
 
 });
 
 describe('OLSKFilesystemPublicDirectoryName', function testOLSKFilesystemPublicDirectoryName() {
 
-	it('returns public directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemPublicDirectoryName(), 'os-public');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemPublicDirectoryName(), 'os-public');
 	});
 
 });
 
 describe('OLSKFilesystemTestingDirectoryName', function testOLSKFilesystemTestingDirectoryName() {
 
-	it('returns system directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemTestingDirectoryName(), 'os-testing');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemTestingDirectoryName(), 'os-testing');
 	});
 
 });
 
 describe('OLSKFilesystemWorkspaceTestingDirectoryName', function testOLSKFilesystemWorkspaceTestingDirectoryName() {
 
-	it('returns workspace testing directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectoryName(), 'os-workspace-testing');
+	it('returns constant', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemWorkspaceTestingDirectoryName(), 'os-workspace-testing');
 	});
 
 });
@@ -217,19 +217,19 @@ describe('OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
-			filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor(null);
+			mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor(null);
 		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('throws error if param1 empty', function() {
 		assert.throws(function() {
-			filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('');
+			mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('');
 		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('returns subfolderName', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
+		assert.strictEqual(mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
+		assert.strictEqual(mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
 	});
 
 });
@@ -237,7 +237,7 @@ describe('OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor', function tes
 describe('OLSKFilesystemLaunchFileName', function testOLSKFilesystemLaunchFileName() {
 
 	it('returns launch file name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemLaunchFileName(), 'os-launch.js');
+		assert.strictEqual(mainModule.OLSKFilesystemLaunchFileName(), 'os-launch.js');
 	});
 
 });
@@ -245,7 +245,7 @@ describe('OLSKFilesystemLaunchFileName', function testOLSKFilesystemLaunchFileNa
 describe('OLSKFilesystemDefaultTextEncoding', function testOLSKFilesystemDefaultTextEncoding() {
 
 	it('returns system directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemDefaultTextEncoding(), 'utf8');
+		assert.strictEqual(mainModule.OLSKFilesystemDefaultTextEncoding(), 'utf8');
 	});
 
 });
@@ -254,80 +254,80 @@ describe('OLSKFilesystemSafeBasenameFor', function testOLSKFilesystemSafeBasenam
 
 	it('throws if not string', function() {
 		assert.throws(function() {
-			filesystemLibrary.OLSKFilesystemSafeBasenameFor(null);
+			mainModule.OLSKFilesystemSafeBasenameFor(null);
 		});
 	});
 
 	it('returns identical if no illegal characters', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha'), 'alpha');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha'), 'alpha');
 	});
 
 	it('returns without dot', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha.bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha.bravo'), 'alpha bravo');
 	});
 
 	it('returns without Comma', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha,bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha,bravo'), 'alpha bravo');
 	});
 
 	it('returns without Semicolon', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha;bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha;bravo'), 'alpha bravo');
 	});
 
 	it('returns without Colon', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha:bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha:bravo'), 'alpha bravo');
 	});
 
 	it('returns without Star', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha*bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha*bravo'), 'alpha bravo');
 	});
 
 	it('returns without Question', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha?bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha?bravo'), 'alpha bravo');
 	});
 
 	it('returns without Pipeline', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha|bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha|bravo'), 'alpha bravo');
 	});
 
 	it('returns without Underscore', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha_bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha_bravo'), 'alpha bravo');
 	});
 
 	it('returns without GreaterLessThan', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha<bravo>charlie'), 'alpha bravo charlie');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha<bravo>charlie'), 'alpha bravo charlie');
 	});
 
 	it('returns without Slashes', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha/bravo\\charlie'), 'alpha bravo charlie');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha/bravo\\charlie'), 'alpha bravo charlie');
 	});
 
 	it('returns without Quotes', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('"alpha" \'bravo\' “charlie” ‘delta’ «echo»'), 'alpha bravo charlie delta echo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('"alpha" \'bravo\' “charlie” ‘delta’ «echo»'), 'alpha bravo charlie delta echo');
 	});
 
 	it('returns without Whitespace', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha\nbravo\tcharlie'), 'alpha bravo charlie');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha\nbravo\tcharlie'), 'alpha bravo charlie');
 	});
 
 	it('returns without DisallowedMultiple', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha \n\t bravo'), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha \n\t bravo'), 'alpha bravo');
 	});
 
 	it('returns without DisallowedEnds', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor(' \n\t alpha bravo \t\n '), 'alpha bravo');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor(' \n\t alpha bravo \t\n '), 'alpha bravo');
 	});
 
 	it('returns without Dashes', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('alpha-bravo–charlie—delta'), 'alpha-bravo–charlie—delta');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('alpha-bravo–charlie—delta'), 'alpha-bravo–charlie—delta');
 	});
 
 	it('returns without Brackets', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('(alpha) [bravo] {charlie}'), '(alpha) [bravo] {charlie}');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('(alpha) [bravo] {charlie}'), '(alpha) [bravo] {charlie}');
 	});
 
 	it('returns without International', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSafeBasenameFor('àlpha niño 縦書き 😀 € $'), 'àlpha niño 縦書き 😀 € $');
+		assert.strictEqual(mainModule.OLSKFilesystemSafeBasenameFor('àlpha niño 縦書き 😀 € $'), 'àlpha niño 縦書き 😀 € $');
 	});
 
 });
