@@ -197,10 +197,10 @@ describe('OLSKFilesystemPublicDirectoryName', function testOLSKFilesystemPublicD
 
 });
 
-describe('OLSKFilesystemSystemDirectoryName', function testOLSKFilesystemSystemDirectoryName() {
+describe('OLSKFilesystemTestingDirectoryName', function testOLSKFilesystemTestingDirectoryName() {
 
 	it('returns system directory name', function() {
-		assert.strictEqual(filesystemLibrary.OLSKFilesystemSystemDirectoryName(), 'os-system');
+		assert.strictEqual(filesystemLibrary.OLSKFilesystemTestingDirectoryName(), 'os-testing');
 	});
 
 });

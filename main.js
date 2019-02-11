@@ -85,10 +85,10 @@ exports.OLSKFilesystemPublicDirectoryName = function() {
 	return 'os-public';
 };
 
-//_ OLSKFilesystemSystemDirectoryName
+//_ OLSKFilesystemTestingDirectoryName
 
-exports.OLSKFilesystemSystemDirectoryName = function() {
-	return 'os-system';
+exports.OLSKFilesystemTestingDirectoryName = function() {
+	return 'os-testing';
 };
 
 //_ OLSKFilesystemWorkspaceTestingDirectoryName
