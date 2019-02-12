@@ -16,6 +16,12 @@ var testRootDirectory = pathPackage.join(
 	mainModule.OLSKFilesystemWorkspaceTestingDirectoryName(),
 	mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
 
+const kTesting = {
+	StubRoot: function (inputData) {
+		return pathPackage.join(testRootDirectory, inputData || '');
+	},
+};
+
 describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
 
 	beforeEach(function() {
@@ -91,12 +97,14 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 		}
 	});
 
-	it('returns null and creates directory', function() {
-		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
+	it('returns null', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa')), null);
+	});
 
-		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
-		assert.strictEqual(fsPackage.existsSync(directoryFullPath), true);
+	it('creates directory', function() {
+		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa')), false);
+		mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa'));
+		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa')), true);
 	});
 
 	it('does not delete existing directory', function() {
