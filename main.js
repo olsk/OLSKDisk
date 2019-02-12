@@ -29,12 +29,12 @@ exports.OLSKFilesystemInputDataIsRealFilePath = function(inputData) {
 
 //_ OLSKFilesystemHelpCreateDirectoryIfDoesNotExist
 
-exports.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist = function(directoryPath) {
-	if (!fsPackage.existsSync(directoryPath)) {
-		mkdirpPackage.sync(directoryPath);
+exports.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist = function(inputData) {
+	if (!fsPackage.existsSync(inputData)) {
+		mkdirpPackage.sync(inputData);
 	}
 
-	return null;
+	return inputData;
 };
 
 //_ OLSKFilesystemHelpDeleteDirectoryRecursive

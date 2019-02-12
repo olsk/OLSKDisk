@@ -97,14 +97,13 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 		}
 	});
 
-	it('returns null', function() {
-		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa')), null);
+	it('returns inputData', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa')), kTesting.StubRoot('alfa'));
 	});
 
 	it('creates directory', function() {
 		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa')), false);
-		mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa'));
-		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa')), true);
+		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa'))), true);
 	});
 
 	it('does not delete existing directory', function() {
@@ -115,8 +114,7 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath), null);
-		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
+		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist(directoryFullPath)), true);
 	});
 
 });
