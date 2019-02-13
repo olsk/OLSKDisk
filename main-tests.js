@@ -4,53 +4,54 @@
  * MIT Licensed
  */
 
-var assert = require('assert');
+const assert = require('assert');
 
-var pathPackage = require('path');
-var fsPackage = require('fs');
-var mkdirpPackage = require('mkdirp');
+const pathPackage = require('path');
+const fsPackage = require('fs');
+const mkdirpPackage = require('mkdirp');
 
 const mainModule = require('./main');
 
-var testRootDirectory = pathPackage.join(
+const kTesting = {
+	StubRootDirectory: function () {
+		return pathPackage.join(
 	mainModule.OLSKFilesystemWorkspaceTestingDirectoryName(),
 	mainModule.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'));
-
-const kTesting = {
+	},
 	StubRoot: function (inputData) {
-		return pathPackage.join(testRootDirectory, inputData || '');
+		return pathPackage.join(kTesting.StubRootDirectory(), inputData || '');
 	},
 };
 
 describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesystemInputDataIsRealDirectoryPath() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testRootDirectory)) {
-			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
 		}
 	});
 
-	it('returns null if parameter not filesystem path', function() {
+	it('returns false if not path', function() {
 		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(''), false);
 	});
 
-	it('returns null if directory path does not exist', function() {
-		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), false);
+	it('returns false if does not exist', function() {
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(kTesting.StubRootDirectory()), false);
 	});
 
-	it('returns null if path not directory', function() {
+	it('returns false if not directory', function() {
 		var fileFullPath = pathPackage.join(
-			testRootDirectory,
+			kTesting.StubRootDirectory(),
 			'alpha.txt'
 		);
-		mkdirpPackage.sync(testRootDirectory);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(fileFullPath), false);
 	});
 
 	it('returns true if directory exists', function() {
-		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(testRootDirectory), true);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealDirectoryPath(kTesting.StubRootDirectory()), true);
 	});
 
 });
@@ -58,13 +59,13 @@ describe('OLSKFilesystemInputDataIsRealDirectoryPath', function testOLSKFilesyst
 describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInputDataIsRealFilePath() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testRootDirectory)) {
-			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
 		}
 	});
 
 	var fileFullPath = pathPackage.join(
-		testRootDirectory,
+		kTesting.StubRootDirectory(),
 		'alpha.txt'
 	);
 
@@ -77,12 +78,12 @@ describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInp
 	});
 
 	it('returns null if path not file', function() {
-		mkdirpPackage.sync(testRootDirectory);
-		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(testRootDirectory), false);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
+		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(kTesting.StubRootDirectory()), false);
 	});
 
 	it('returns true if file exists', function() {
-		mkdirpPackage.sync(testRootDirectory);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(mainModule.OLSKFilesystemInputDataIsRealFilePath(fileFullPath), true);
 	});
@@ -92,8 +93,8 @@ describe('OLSKFilesystemInputDataIsRealFilePath', function testOLSKFilesystemInp
 describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFilesystemHelpCreateDirectoryIfDoesNotExist() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testRootDirectory)) {
-			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
 		}
 	});
 
@@ -107,7 +108,7 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 	});
 
 	it('does not delete existing directory', function() {
-		var directoryFullPath = pathPackage.join(testRootDirectory, 'alpha');
+		var directoryFullPath = pathPackage.join(kTesting.StubRootDirectory(), 'alpha');
 		mkdirpPackage.sync(directoryFullPath);
 
 		var fileFullPath = pathPackage.join(directoryFullPath, 'bravo.txt');
@@ -122,15 +123,15 @@ describe('OLSKFilesystemHelpCreateDirectoryIfDoesNotExist', function testOLSKFil
 describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesystemHelpDeleteDirectoryRecursive() {
 
 	beforeEach(function() {
-		if (fsPackage.existsSync(testRootDirectory)) {
-			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory);
+		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
+			mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
 		}
-		mkdirpPackage.sync(testRootDirectory);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
 	});
 
 	it('returns 0 if path does not exist', function() {
 		var directoryFullPath = pathPackage.join(
-			testRootDirectory,
+			kTesting.StubRootDirectory(),
 			'alpha'
 		);
 
@@ -140,10 +141,10 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 
 	it('returns 0 if path not directory', function() {
 		var fileFullPath = pathPackage.join(
-			testRootDirectory,
+			kTesting.StubRootDirectory(),
 			'alpha.txt'
 		);
-		mkdirpPackage.sync(testRootDirectory);
+		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
 
 		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(fileFullPath), 0);
@@ -151,7 +152,7 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 
 	it('returns 1 and deletes directory', function() {
 		var directoryFullPath = pathPackage.join(
-			testRootDirectory,
+			kTesting.StubRootDirectory(),
 			'alpha'
 		);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
@@ -164,9 +165,9 @@ describe('OLSKFilesystemHelpDeleteDirectoryRecursive', function testOLSKFilesyst
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(testRootDirectory), 1);
+		assert.strictEqual(mainModule.OLSKFilesystemHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory()), 1);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(fsPackage.existsSync(testRootDirectory), false);
+		assert.strictEqual(fsPackage.existsSync(kTesting.StubRootDirectory()), false);
 	});
 
 });
