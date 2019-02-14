@@ -27,7 +27,7 @@ describe('OLSKDiskInputDataIsRealDirectoryPath', function testOLSKDiskInputDataI
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
-			mainModule.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
+			mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
 		}
 	});
 
@@ -60,7 +60,7 @@ describe('OLSKDiskInputDataIsRealFilePath', function testOLSKDiskInputDataIsReal
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
-			mainModule.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
+			mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
 		}
 	});
 
@@ -94,7 +94,7 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
-			mainModule.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
+			mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
 		}
 	});
 
@@ -120,11 +120,11 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 
 });
 
-describe('OLSKDiskHelpDeleteDirectoryRecursive', function testOLSKDiskHelpDeleteDirectoryRecursive() {
+describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
-			mainModule.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory());
+			mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
 		}
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
 	});
@@ -136,7 +136,7 @@ describe('OLSKDiskHelpDeleteDirectoryRecursive', function testOLSKDiskHelpDelete
 		);
 
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(mainModule.OLSKDiskHelpDeleteDirectoryRecursive(directoryFullPath), 0);
+		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(directoryFullPath), 0);
 	});
 
 	it('returns 0 if path not directory', function() {
@@ -147,7 +147,7 @@ describe('OLSKDiskHelpDeleteDirectoryRecursive', function testOLSKDiskHelpDelete
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
 
-		assert.strictEqual(mainModule.OLSKDiskHelpDeleteDirectoryRecursive(fileFullPath), 0);
+		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(fileFullPath), 0);
 	});
 
 	it('returns 1 and deletes directory', function() {
@@ -165,7 +165,7 @@ describe('OLSKDiskHelpDeleteDirectoryRecursive', function testOLSKDiskHelpDelete
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(mainModule.OLSKDiskHelpDeleteDirectoryRecursive(kTesting.StubRootDirectory()), 1);
+		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory()), 1);
 		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
 		assert.strictEqual(fsPackage.existsSync(kTesting.StubRootDirectory()), false);
 	});

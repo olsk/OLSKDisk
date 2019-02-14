@@ -37,9 +37,9 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 	return inputData;
 };
 
-//_ OLSKDiskHelpDeleteDirectoryRecursive
+//_ OLSKDiskDeleteFolder
 
-exports.OLSKDiskHelpDeleteDirectoryRecursive = function(directoryPath) {
+exports.OLSKDiskDeleteFolder = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		return 0;
 	}
@@ -51,7 +51,7 @@ exports.OLSKDiskHelpDeleteDirectoryRecursive = function(directoryPath) {
 	fsPackage.readdirSync(directoryPath).forEach(function(fileName) {
 		var currentPath = directoryPath + '/' + fileName;
 		if (fsPackage.lstatSync(currentPath).isDirectory()) {
-			exports.OLSKDiskHelpDeleteDirectoryRecursive(currentPath);
+			exports.OLSKDiskDeleteFolder(currentPath);
 		} else {
 			fsPackage.unlinkSync(currentPath);
 		}
