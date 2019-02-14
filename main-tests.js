@@ -13,18 +13,15 @@ const mkdirpPackage = require('mkdirp');
 const mainModule = require('./main');
 
 const kTesting = {
-	StubRootDirectory: function (inputData) {
-		return pathPackage.join(mainModule.OLSKDiskWorkspaceTestingFolderName(), mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os.filesystem'), inputData || '');
-	},
 	StubRoot: function (inputData) {
-		return pathPackage.join(kTesting.StubRootDirectory(), inputData || '');
+		return pathPackage.join(mainModule.OLSKDiskWorkspaceTestingFolderName(), mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os.filesystem'), inputData || '');
 	},
 };
 
 describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 
 	beforeEach(function() {
-		mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
 	});
 
 	it('returns false if not path', function() {
@@ -32,18 +29,18 @@ describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 	});
 
 	it('returns false if not real', function() {
-		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRootDirectory()), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRoot()), false);
 	});
 
-	it('returns false if not directory', function() {
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
-		fsPackage.writeFileSync(kTesting.StubRootDirectory('alfa.txt'), '');
-		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRootDirectory('alfa.txt')), false);
+	it('returns false if not folder', function() {
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
+		fsPackage.writeFileSync(kTesting.StubRoot('alfa.txt'), '');
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRoot('alfa.txt')), false);
 	});
 
 	it('returns true', function() {
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
-		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRootDirectory()), true);
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRoot()), true);
 	});
 
 });
@@ -51,11 +48,11 @@ describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
 
 	beforeEach(function() {
-		mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
 	});
 
 	var fileFullPath = pathPackage.join(
-		kTesting.StubRootDirectory(),
+		kTesting.StubRoot(),
 		'alpha.txt'
 	);
 
@@ -68,12 +65,12 @@ describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
 	});
 
 	it('returns null if path not file', function() {
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
-		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(kTesting.StubRootDirectory()), false);
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(kTesting.StubRoot()), false);
 	});
 
 	it('returns true if file exists', function() {
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(fileFullPath), true);
 	});
@@ -83,7 +80,7 @@ describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
 describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 
 	beforeEach(function() {
-		mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
 	});
 
 	it('returns inputData', function() {
@@ -96,14 +93,14 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 	});
 
 	it('does nothing if exists', function() {
-		var directoryFullPath = pathPackage.join(kTesting.StubRootDirectory(), 'alpha');
-		mainModule.OLSKDiskCreateFolder(directoryFullPath);
+		var folderFullPath = pathPackage.join(kTesting.StubRoot(), 'alpha');
+		mainModule.OLSKDiskCreateFolder(folderFullPath);
 
-		var fileFullPath = pathPackage.join(directoryFullPath, 'bravo.txt');
+		var fileFullPath = pathPackage.join(folderFullPath, 'bravo.txt');
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskCreateFolder(directoryFullPath)), true);
+		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskCreateFolder(folderFullPath)), true);
 	});
 
 });
@@ -111,49 +108,49 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 
 	beforeEach(function() {
-		mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory());
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
 	});
 
 	it('returns 0 if path does not exist', function() {
-		var directoryFullPath = pathPackage.join(
-			kTesting.StubRootDirectory(),
+		var folderFullPath = pathPackage.join(
+			kTesting.StubRoot(),
 			'alpha'
 		);
 
-		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(directoryFullPath), 0);
+		assert.strictEqual(fsPackage.existsSync(folderFullPath), false);
+		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(folderFullPath), 0);
 	});
 
-	it('returns 0 if path not directory', function() {
+	it('returns 0 if path not folder', function() {
 		var fileFullPath = pathPackage.join(
-			kTesting.StubRootDirectory(),
+			kTesting.StubRoot(),
 			'alpha.txt'
 		);
-		mainModule.OLSKDiskCreateFolder(kTesting.StubRootDirectory());
+		mainModule.OLSKDiskCreateFolder(kTesting.StubRoot());
 		fsPackage.writeFileSync(fileFullPath, '');
 
 		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(fileFullPath), 0);
 	});
 
-	it('returns 1 and deletes directory', function() {
-		var directoryFullPath = pathPackage.join(
-			kTesting.StubRootDirectory(),
+	it('returns 1 and deletes folder', function() {
+		var folderFullPath = pathPackage.join(
+			kTesting.StubRoot(),
 			'alpha'
 		);
-		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
+		assert.strictEqual(fsPackage.existsSync(folderFullPath), false);
 
 		var fileFullPath = pathPackage.join(
-			directoryFullPath,
+			folderFullPath,
 			'alpha.txt'
 		);
-		mainModule.OLSKDiskCreateFolder(directoryFullPath);
+		mainModule.OLSKDiskCreateFolder(folderFullPath);
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(kTesting.StubRootDirectory()), 1);
-		assert.strictEqual(fsPackage.existsSync(directoryFullPath), false);
-		assert.strictEqual(fsPackage.existsSync(kTesting.StubRootDirectory()), false);
+		assert.strictEqual(mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot()), 1);
+		assert.strictEqual(fsPackage.existsSync(folderFullPath), false);
+		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot()), false);
 	});
 
 });
@@ -200,13 +197,13 @@ describe('OLSKDiskWorkspaceTestingFolderName', function testOLSKDiskWorkspaceTes
 
 describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDiskWorkspaceTestingFolderSubfolderNameFor() {
 
-	it('throws error if param1 not string', function() {
+	it('throws error if not string', function() {
 		assert.throws(function() {
 			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor(null);
 		}, /OLSKErrorInputInvalid/);
 	});
 
-	it('throws error if param1 empty', function() {
+	it('throws error if empty', function() {
 		assert.throws(function() {
 			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('');
 		}, /OLSKErrorInputInvalid/);
@@ -221,7 +218,7 @@ describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDisk
 
 describe('OLSKDiskLaunchFileName', function testOLSKDiskLaunchFileName() {
 
-	it('returns launch file name', function() {
+	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskLaunchFileName(), 'os-launch.js');
 	});
 
@@ -229,7 +226,7 @@ describe('OLSKDiskLaunchFileName', function testOLSKDiskLaunchFileName() {
 
 describe('OLSKDiskDefaultTextEncoding', function testOLSKDiskDefaultTextEncoding() {
 
-	it('returns system directory name', function() {
+	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskDefaultTextEncoding(), 'utf8');
 	});
 

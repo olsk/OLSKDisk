@@ -39,17 +39,17 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 
 //_ OLSKDiskDeleteFolder
 
-exports.OLSKDiskDeleteFolder = function(directoryPath) {
-	if (!fsPackage.existsSync(directoryPath)) {
+exports.OLSKDiskDeleteFolder = function(inputData) {
+	if (!fsPackage.existsSync(inputData)) {
 		return 0;
 	}
 
-	if (!fsPackage.lstatSync(directoryPath).isDirectory()) {
+	if (!fsPackage.lstatSync(inputData).isDirectory()) {
 		return 0;
 	}
 
-	fsPackage.readdirSync(directoryPath).forEach(function(fileName) {
-		var currentPath = directoryPath + '/' + fileName;
+	fsPackage.readdirSync(inputData).forEach(function(fileName) {
+		var currentPath = inputData + '/' + fileName;
 		if (fsPackage.lstatSync(currentPath).isDirectory()) {
 			exports.OLSKDiskDeleteFolder(currentPath);
 		} else {
@@ -57,7 +57,7 @@ exports.OLSKDiskDeleteFolder = function(directoryPath) {
 		}
 	});
 
-	fsPackage.rmdirSync(directoryPath);
+	fsPackage.rmdirSync(inputData);
 	return 1;
 };
 
