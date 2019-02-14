@@ -1,5 +1,5 @@
 /*!
- * OLSKFilesystem
+ * OLSKDisk
  * Copyright(c) 2018 Rosano Coutinho
  * MIT Licensed
  */
@@ -7,9 +7,9 @@
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-//_ OLSKFilesystemInputDataIsRealDirectoryPath
+//_ OLSKDiskInputDataIsRealDirectoryPath
 
-exports.OLSKFilesystemInputDataIsRealDirectoryPath = function(inputData) {
+exports.OLSKDiskInputDataIsRealDirectoryPath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	}
@@ -17,9 +17,9 @@ exports.OLSKFilesystemInputDataIsRealDirectoryPath = function(inputData) {
 	return fsPackage.lstatSync(inputData).isDirectory();
 };
 
-//_ OLSKFilesystemInputDataIsRealFilePath
+//_ OLSKDiskInputDataIsRealFilePath
 
-exports.OLSKFilesystemInputDataIsRealFilePath = function(inputData) {
+exports.OLSKDiskInputDataIsRealFilePath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	}
@@ -27,9 +27,9 @@ exports.OLSKFilesystemInputDataIsRealFilePath = function(inputData) {
 	return fsPackage.lstatSync(inputData).isFile();
 };
 
-//_ OLSKFilesystemHelpCreateDirectoryIfDoesNotExist
+//_ OLSKDiskHelpCreateDirectoryIfDoesNotExist
 
-exports.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist = function(inputData) {
+exports.OLSKDiskHelpCreateDirectoryIfDoesNotExist = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		mkdirpPackage.sync(inputData);
 	}
@@ -37,9 +37,9 @@ exports.OLSKFilesystemHelpCreateDirectoryIfDoesNotExist = function(inputData) {
 	return inputData;
 };
 
-//_ OLSKFilesystemHelpDeleteDirectoryRecursive
+//_ OLSKDiskHelpDeleteDirectoryRecursive
 
-exports.OLSKFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
+exports.OLSKDiskHelpDeleteDirectoryRecursive = function(directoryPath) {
 	if (!fsPackage.existsSync(directoryPath)) {
 		return 0;
 	}
@@ -51,7 +51,7 @@ exports.OLSKFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
 	fsPackage.readdirSync(directoryPath).forEach(function(fileName) {
 		var currentPath = directoryPath + '/' + fileName;
 		if (fsPackage.lstatSync(currentPath).isDirectory()) {
-			exports.OLSKFilesystemHelpDeleteDirectoryRecursive(currentPath);
+			exports.OLSKDiskHelpDeleteDirectoryRecursive(currentPath);
 		} else {
 			fsPackage.unlinkSync(currentPath);
 		}
@@ -61,39 +61,39 @@ exports.OLSKFilesystemHelpDeleteDirectoryRecursive = function(directoryPath) {
 	return 1;
 };
 
-//_ OLSKFilesystemAppDirectoryName
+//_ OLSKDiskAppDirectoryName
 
-exports.OLSKFilesystemAppDirectoryName = function() {
+exports.OLSKDiskAppDirectoryName = function() {
 	return 'os-app';
 };
 
-//_ OLSKFilesystemCacheDirectoryName
+//_ OLSKDiskCacheDirectoryName
 
-exports.OLSKFilesystemCacheDirectoryName = function() {
+exports.OLSKDiskCacheDirectoryName = function() {
 	return 'os-cache';
 };
 
-//_ OLSKFilesystemDataDirectoryName
+//_ OLSKDiskDataDirectoryName
 
-exports.OLSKFilesystemDataDirectoryName = function() {
+exports.OLSKDiskDataDirectoryName = function() {
 	return 'os-data';
 };
 
-//_ OLSKFilesystemPublicDirectoryName
+//_ OLSKDiskPublicDirectoryName
 
-exports.OLSKFilesystemPublicDirectoryName = function() {
+exports.OLSKDiskPublicDirectoryName = function() {
 	return 'os-public';
 };
 
-//_ OLSKFilesystemWorkspaceTestingDirectoryName
+//_ OLSKDiskWorkspaceTestingDirectoryName
 
-exports.OLSKFilesystemWorkspaceTestingDirectoryName = function() {
+exports.OLSKDiskWorkspaceTestingDirectoryName = function() {
 	return 'os-workspace-testing';
 };
 
-//_ OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor
+//_ OLSKDiskWorkspaceTestingDirectorySubfolderNameFor
 
-exports.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor = function(inputData) {
+exports.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('OLSKErrorInputInvalid');
 	}
@@ -105,21 +105,21 @@ exports.OLSKFilesystemWorkspaceTestingDirectorySubfolderNameFor = function(input
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
 
-//_ OLSKFilesystemLaunchFileName
+//_ OLSKDiskLaunchFileName
 
-exports.OLSKFilesystemLaunchFileName = function() {
+exports.OLSKDiskLaunchFileName = function() {
 	return 'os-launch.js';
 };
 
-//_ OLSKFilesystemDefaultTextEncoding
+//_ OLSKDiskDefaultTextEncoding
 
-exports.OLSKFilesystemDefaultTextEncoding = function() {
+exports.OLSKDiskDefaultTextEncoding = function() {
 	return 'utf8';
 };
 
-//_ OLSKFilesystemSafeBasenameFor
+//_ OLSKDiskSafeBasenameFor
 
-exports.OLSKFilesystemSafeBasenameFor = function(inputData) {
+exports.OLSKDiskSafeBasenameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('OLSKErrorInputInvalid');
 	}
