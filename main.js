@@ -7,9 +7,9 @@
 var fsPackage = require('fs');
 var mkdirpPackage = require('mkdirp');
 
-//_ OLSKDiskInputDataIsRealDirectoryPath
+//_ OLSKDiskIsRealFolderPath
 
-exports.OLSKDiskInputDataIsRealDirectoryPath = function(inputData) {
+exports.OLSKDiskIsRealFolderPath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	}

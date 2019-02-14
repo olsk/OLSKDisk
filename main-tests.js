@@ -23,7 +23,7 @@ const kTesting = {
 	},
 };
 
-describe('OLSKDiskInputDataIsRealDirectoryPath', function testOLSKDiskInputDataIsRealDirectoryPath() {
+describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
@@ -32,11 +32,11 @@ describe('OLSKDiskInputDataIsRealDirectoryPath', function testOLSKDiskInputDataI
 	});
 
 	it('returns false if not path', function() {
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealDirectoryPath(''), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(''), false);
 	});
 
 	it('returns false if does not exist', function() {
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealDirectoryPath(kTesting.StubRootDirectory()), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRootDirectory()), false);
 	});
 
 	it('returns false if not directory', function() {
@@ -46,12 +46,12 @@ describe('OLSKDiskInputDataIsRealDirectoryPath', function testOLSKDiskInputDataI
 		);
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealDirectoryPath(fileFullPath), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(fileFullPath), false);
 	});
 
 	it('returns true if directory exists', function() {
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealDirectoryPath(kTesting.StubRootDirectory()), true);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRootDirectory()), true);
 	});
 
 });
