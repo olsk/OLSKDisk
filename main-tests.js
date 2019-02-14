@@ -233,14 +233,6 @@ describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDisk
 
 });
 
-describe('OLSKDiskLaunchFileName', function testOLSKDiskLaunchFileName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskLaunchFileName(), 'os-launch.js');
-	});
-
-});
-
 describe('OLSKDiskDefaultTextEncoding', function testOLSKDiskDefaultTextEncoding() {
 
 	it('returns constant', function() {

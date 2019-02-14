@@ -144,12 +144,6 @@ exports.OLSKDiskWorkspaceTestingFolderSubfolderNameFor = function(inputData) {
 	return ['test', inputData].join('.').replace(/\./g, '-');
 };
 
-//_ OLSKDiskLaunchFileName
-
-exports.OLSKDiskLaunchFileName = function() {
-	return 'os-launch.js';
-};
-
 //_ OLSKDiskDefaultTextEncoding
 
 exports.OLSKDiskDefaultTextEncoding = function() {
