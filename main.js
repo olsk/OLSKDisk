@@ -35,6 +35,10 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 		throw new Error('OLSKErrorInputInvalid');
 	}
 
+	if (exports.OLSKDiskIsRealFilePath(inputData)) {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
 	if (!fsPackage.existsSync(inputData)) {
 		mkdirpPackage.sync(inputData);
 	}

@@ -70,6 +70,12 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 		}, /OLSKErrorInputInvalid/);
 	});
 
+	it('throws if real file', function() {
+		assert.throws(function () {
+			mainModule.OLSKDiskCreateFolder(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa'), ''));
+		}, /OLSKErrorInputInvalid/);
+	});
+
 	it('returns inputData', function() {
 		assert.strictEqual(mainModule.OLSKDiskCreateFolder(kTesting.StubRoot('alfa')), kTesting.StubRoot('alfa'));
 	});
