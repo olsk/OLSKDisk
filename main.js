@@ -31,6 +31,10 @@ exports.OLSKDiskIsRealFilePath = function(inputData) {
 //_ OLSKDiskCreateFolder
 
 exports.OLSKDiskCreateFolder = function(inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
 	if (!fsPackage.existsSync(inputData)) {
 		mkdirpPackage.sync(inputData);
 	}
@@ -41,25 +45,23 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 //_ OLSKDiskDeleteFolder
 
 exports.OLSKDiskDeleteFolder = function(inputData) {
-	if (!fsPackage.existsSync(inputData)) {
-		return 0;
+	if (typeof inputData !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
 	}
 
-	if (!fsPackage.lstatSync(inputData).isDirectory()) {
-		return 0;
+	if (exports.OLSKDiskIsRealFolderPath(inputData)) {
+		fsPackage.readdirSync(inputData).forEach(function(e) {
+			if (exports.OLSKDiskIsRealFolderPath(pathPackage.join(inputData, e))) {
+				return exports.OLSKDiskDeleteFolder(pathPackage.join(inputData, e));
+			}
+
+			fsPackage.unlinkSync(pathPackage.join(inputData, e));
+		});
+
+		fsPackage.rmdirSync(inputData);
 	}
 
-	fsPackage.readdirSync(inputData).forEach(function(fileName) {
-		var currentPath = inputData + '/' + fileName;
-		if (fsPackage.lstatSync(currentPath).isDirectory()) {
-			exports.OLSKDiskDeleteFolder(currentPath);
-		} else {
-			fsPackage.unlinkSync(currentPath);
-		}
-	});
-
-	fsPackage.rmdirSync(inputData);
-	return 1;
+	return inputData;
 };
 
 //_ OLSKDiskWriteFile
