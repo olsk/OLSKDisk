@@ -17,9 +17,9 @@ exports.OLSKDiskIsRealFolderPath = function(inputData) {
 	return fsPackage.lstatSync(inputData).isDirectory();
 };
 
-//_ OLSKDiskInputDataIsRealFilePath
+//_ OLSKDiskIsRealFilePath
 
-exports.OLSKDiskInputDataIsRealFilePath = function(inputData) {
+exports.OLSKDiskIsRealFilePath = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		return false;
 	}

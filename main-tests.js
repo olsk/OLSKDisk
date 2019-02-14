@@ -56,7 +56,7 @@ describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 
 });
 
-describe('OLSKDiskInputDataIsRealFilePath', function testOLSKDiskInputDataIsRealFilePath() {
+describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
@@ -70,22 +70,22 @@ describe('OLSKDiskInputDataIsRealFilePath', function testOLSKDiskInputDataIsReal
 	);
 
 	it('returns null if parameter not filesystem path', function() {
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealFilePath(''), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(''), false);
 	});
 
 	it('returns null if file path does not exist', function() {
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealFilePath(fileFullPath), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(fileFullPath), false);
 	});
 
 	it('returns null if path not file', function() {
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealFilePath(kTesting.StubRootDirectory()), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(kTesting.StubRootDirectory()), false);
 	});
 
 	it('returns true if file exists', function() {
 		mkdirpPackage.sync(kTesting.StubRootDirectory());
 		fsPackage.writeFileSync(fileFullPath, '');
-		assert.strictEqual(mainModule.OLSKDiskInputDataIsRealFilePath(fileFullPath), true);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(fileFullPath), true);
 	});
 
 });
