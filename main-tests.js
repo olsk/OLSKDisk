@@ -6,11 +6,10 @@
 
 const assert = require('assert');
 
-const pathPackage = require('path');
-const fsPackage = require('fs');
-const mkdirpPackage = require('mkdirp');
-
 const mainModule = require('./main');
+
+const pathPackage = require('path');
+const mkdirpPackage = require('mkdirp');
 
 const kTesting = {
 	StubRoot: function (inputData) {
@@ -81,8 +80,8 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 	});
 
 	it('creates folder', function() {
-		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa/bravo')), false);
-		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskCreateFolder(kTesting.StubRoot('alfa/bravo'))), true);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRoot('alfa/bravo')), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(mainModule.OLSKDiskCreateFolder(kTesting.StubRoot('alfa/bravo'))), true);
 	});
 
 });
