@@ -14,7 +14,7 @@ const mainModule = require('./main');
 
 const kTesting = {
 	StubRootDirectory: function (inputData) {
-		return pathPackage.join(mainModule.OLSKDiskWorkspaceTestingDirectoryName(), mainModule.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor('os.filesystem'), inputData || '');
+		return pathPackage.join(mainModule.OLSKDiskWorkspaceTestingFolderName(), mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os.filesystem'), inputData || '');
 	},
 	StubRoot: function (inputData) {
 		return pathPackage.join(kTesting.StubRootDirectory(), inputData || '');
@@ -158,63 +158,63 @@ describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 
 });
 
-describe('OLSKDiskAppDirectoryName', function testOLSKDiskAppDirectoryName() {
+describe('OLSKDiskAppFolderName', function testOLSKDiskAppFolderName() {
 
 	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskAppDirectoryName(), 'os-app');
+		assert.strictEqual(mainModule.OLSKDiskAppFolderName(), 'os-app');
 	});
 
 });
 
-describe('OLSKDiskCacheDirectoryName', function testOLSKDiskCacheDirectoryName() {
+describe('OLSKDiskCacheFolderName', function testOLSKDiskCacheFolderName() {
 
 	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskCacheDirectoryName(), 'os-cache');
+		assert.strictEqual(mainModule.OLSKDiskCacheFolderName(), 'os-cache');
 	});
 
 });
 
-describe('OLSKDiskDataDirectoryName', function testOLSKDiskDataDirectoryName() {
+describe('OLSKDiskDataFolderName', function testOLSKDiskDataFolderName() {
 
 	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskDataDirectoryName(), 'os-data');
+		assert.strictEqual(mainModule.OLSKDiskDataFolderName(), 'os-data');
 	});
 
 });
 
-describe('OLSKDiskPublicDirectoryName', function testOLSKDiskPublicDirectoryName() {
+describe('OLSKDiskPublicFolderName', function testOLSKDiskPublicFolderName() {
 
 	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskPublicDirectoryName(), 'os-public');
+		assert.strictEqual(mainModule.OLSKDiskPublicFolderName(), 'os-public');
 	});
 
 });
 
-describe('OLSKDiskWorkspaceTestingDirectoryName', function testOLSKDiskWorkspaceTestingDirectoryName() {
+describe('OLSKDiskWorkspaceTestingFolderName', function testOLSKDiskWorkspaceTestingFolderName() {
 
 	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingDirectoryName(), 'os-workspace-testing');
+		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingFolderName(), 'os-workspace-testing');
 	});
 
 });
 
-describe('OLSKDiskWorkspaceTestingDirectorySubfolderNameFor', function testOLSKDiskWorkspaceTestingDirectorySubfolderNameFor() {
+describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDiskWorkspaceTestingFolderSubfolderNameFor() {
 
 	it('throws error if param1 not string', function() {
 		assert.throws(function() {
-			mainModule.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor(null);
+			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor(null);
 		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('throws error if param1 empty', function() {
 		assert.throws(function() {
-			mainModule.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor('');
+			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('');
 		}, /OLSKErrorInputInvalid/);
 	});
 
 	it('returns subfolderName', function() {
-		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor('os-alpha'), 'test-os-alpha');
-		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
+		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os-alpha'), 'test-os-alpha');
+		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os-bravo.charlie'), 'test-os-bravo-charlie');
 	});
 
 });

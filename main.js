@@ -61,39 +61,39 @@ exports.OLSKDiskDeleteFolder = function(directoryPath) {
 	return 1;
 };
 
-//_ OLSKDiskAppDirectoryName
+//_ OLSKDiskAppFolderName
 
-exports.OLSKDiskAppDirectoryName = function() {
+exports.OLSKDiskAppFolderName = function() {
 	return 'os-app';
 };
 
-//_ OLSKDiskCacheDirectoryName
+//_ OLSKDiskCacheFolderName
 
-exports.OLSKDiskCacheDirectoryName = function() {
+exports.OLSKDiskCacheFolderName = function() {
 	return 'os-cache';
 };
 
-//_ OLSKDiskDataDirectoryName
+//_ OLSKDiskDataFolderName
 
-exports.OLSKDiskDataDirectoryName = function() {
+exports.OLSKDiskDataFolderName = function() {
 	return 'os-data';
 };
 
-//_ OLSKDiskPublicDirectoryName
+//_ OLSKDiskPublicFolderName
 
-exports.OLSKDiskPublicDirectoryName = function() {
+exports.OLSKDiskPublicFolderName = function() {
 	return 'os-public';
 };
 
-//_ OLSKDiskWorkspaceTestingDirectoryName
+//_ OLSKDiskWorkspaceTestingFolderName
 
-exports.OLSKDiskWorkspaceTestingDirectoryName = function() {
+exports.OLSKDiskWorkspaceTestingFolderName = function() {
 	return 'os-workspace-testing';
 };
 
-//_ OLSKDiskWorkspaceTestingDirectorySubfolderNameFor
+//_ OLSKDiskWorkspaceTestingFolderSubfolderNameFor
 
-exports.OLSKDiskWorkspaceTestingDirectorySubfolderNameFor = function(inputData) {
+exports.OLSKDiskWorkspaceTestingFolderSubfolderNameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
 		throw new Error('OLSKErrorInputInvalid');
 	}
