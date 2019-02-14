@@ -4,8 +4,9 @@
  * MIT Licensed
  */
 
-var fsPackage = require('fs');
-var mkdirpPackage = require('mkdirp');
+const fsPackage = require('fs');
+const pathPackage = require('path');
+const mkdirpPackage = require('mkdirp');
 
 //_ OLSKDiskIsRealFolderPath
 
@@ -59,6 +60,38 @@ exports.OLSKDiskDeleteFolder = function(inputData) {
 
 	fsPackage.rmdirSync(inputData);
 	return 1;
+};
+
+//_ OLSKDiskWriteFile
+
+exports.OLSKDiskWriteFile = function(param1, param2) {
+	if (typeof param1 !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
+	if (typeof param2 !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
+	exports.OLSKDiskCreateFolder(pathPackage.dirname(param1));
+
+	fsPackage.writeFileSync(param1, param2);
+
+	return param1;
+};
+
+//_ OLSKDiskReadFile
+
+exports.OLSKDiskReadFile = function(inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
+	if (!exports.OLSKDiskIsRealFilePath(inputData)) {
+		throw new Error('OLSKErrorInputInvalid');
+	}
+
+	return fsPackage.readFileSync(inputData, exports.OLSKDiskDefaultTextEncoding());
 };
 
 //_ OLSKDiskAppFolderName

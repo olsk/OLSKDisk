@@ -155,6 +155,69 @@ describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 
 });
 
+describe('OLSKDiskWriteFile', function testOLSKDiskWriteFile() {
+
+	beforeEach(function() {
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
+	});
+
+	it('throws if param1 not string', function() {
+		assert.throws(function () {
+			mainModule.OLSKDiskWriteFile(null, '');
+		}, /OLSKErrorInputInvalid/);
+	});
+
+	it('throws if param2 not string', function() {
+		assert.throws(function () {
+			mainModule.OLSKDiskWriteFile('', null);
+		}, /OLSKErrorInputInvalid/);
+	});
+
+	it('returns param1', function() {
+		assert.strictEqual(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), ''), kTesting.StubRoot('alfa.txt'));
+	});
+
+	it('creates parent folders if not real', function() {
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(kTesting.StubRoot('alfa'), ''), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFolderPath(pathPackage.dirname(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa/bravo.txt'), ''))), true);
+	});
+
+	it('creates file if not real', function() {
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(kTesting.StubRoot('alfa.txt'), ''), false);
+		assert.strictEqual(mainModule.OLSKDiskIsRealFilePath(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), '')), true);
+	});
+
+	it('updates content', function() {
+		assert.strictEqual(mainModule.OLSKDiskReadFile(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), 'bravo')), 'bravo');
+		assert.strictEqual(mainModule.OLSKDiskReadFile(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), 'charlie')), 'charlie');
+	});
+
+});
+
+describe('OLSKDiskReadFile', function testOLSKDiskReadFile() {
+
+	beforeEach(function() {
+		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
+	});
+
+	it('throws if not string', function() {
+		assert.throws(function () {
+			mainModule.OLSKDiskReadFile(null);
+		}, /OLSKErrorInputInvalid/);
+	});
+
+	it('throws if not real path', function() {
+		assert.throws(function () {
+			mainModule.OLSKDiskReadFile('alfa.txt');
+		}, /OLSKErrorInputInvalid/);
+	});
+
+	it('returns content', function() {
+		assert.strictEqual(mainModule.OLSKDiskReadFile(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), 'bravo')), 'bravo');
+	});
+
+});
+
 describe('OLSKDiskAppFolderName', function testOLSKDiskAppFolderName() {
 
 	it('returns constant', function() {
