@@ -90,7 +90,7 @@ describe('OLSKDiskInputDataIsRealFilePath', function testOLSKDiskInputDataIsReal
 
 });
 
-describe('OLSKDiskHelpCreateDirectoryIfDoesNotExist', function testOLSKDiskHelpCreateDirectoryIfDoesNotExist() {
+describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 
 	beforeEach(function() {
 		if (fsPackage.existsSync(kTesting.StubRootDirectory())) {
@@ -99,12 +99,12 @@ describe('OLSKDiskHelpCreateDirectoryIfDoesNotExist', function testOLSKDiskHelpC
 	});
 
 	it('returns inputData', function() {
-		assert.strictEqual(mainModule.OLSKDiskHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa')), kTesting.StubRoot('alfa'));
+		assert.strictEqual(mainModule.OLSKDiskCreateFolder(kTesting.StubRoot('alfa')), kTesting.StubRoot('alfa'));
 	});
 
 	it('creates directory', function() {
 		assert.strictEqual(fsPackage.existsSync(kTesting.StubRoot('alfa')), false);
-		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskHelpCreateDirectoryIfDoesNotExist(kTesting.StubRoot('alfa'))), true);
+		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskCreateFolder(kTesting.StubRoot('alfa'))), true);
 	});
 
 	it('does not delete existing directory', function() {
@@ -115,7 +115,7 @@ describe('OLSKDiskHelpCreateDirectoryIfDoesNotExist', function testOLSKDiskHelpC
 		fsPackage.writeFileSync(fileFullPath, '');
 		assert.strictEqual(fsPackage.existsSync(fileFullPath), true);
 
-		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskHelpCreateDirectoryIfDoesNotExist(directoryFullPath)), true);
+		assert.strictEqual(fsPackage.existsSync(mainModule.OLSKDiskCreateFolder(directoryFullPath)), true);
 	});
 
 });

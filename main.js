@@ -27,9 +27,9 @@ exports.OLSKDiskInputDataIsRealFilePath = function(inputData) {
 	return fsPackage.lstatSync(inputData).isFile();
 };
 
-//_ OLSKDiskHelpCreateDirectoryIfDoesNotExist
+//_ OLSKDiskCreateFolder
 
-exports.OLSKDiskHelpCreateDirectoryIfDoesNotExist = function(inputData) {
+exports.OLSKDiskCreateFolder = function(inputData) {
 	if (!fsPackage.existsSync(inputData)) {
 		mkdirpPackage.sync(inputData);
 	}
