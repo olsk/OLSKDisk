@@ -32,11 +32,11 @@ exports.OLSKDiskIsRealFilePath = function(inputData) {
 
 exports.OLSKDiskCreateFolder = function(inputData) {
 	if (typeof inputData !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (exports.OLSKDiskIsRealFilePath(inputData)) {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (!fsPackage.existsSync(inputData)) {
@@ -50,7 +50,7 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 
 exports.OLSKDiskDeleteFolder = function(inputData) {
 	if (typeof inputData !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (exports.OLSKDiskIsRealFolderPath(inputData)) {
@@ -72,11 +72,11 @@ exports.OLSKDiskDeleteFolder = function(inputData) {
 
 exports.OLSKDiskWriteFile = function(param1, param2) {
 	if (typeof param1 !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (typeof param2 !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	exports.OLSKDiskCreateFolder(pathPackage.dirname(param1));
@@ -90,11 +90,11 @@ exports.OLSKDiskWriteFile = function(param1, param2) {
 
 exports.OLSKDiskReadFile = function(inputData) {
 	if (typeof inputData !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (!exports.OLSKDiskIsRealFilePath(inputData)) {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	return fsPackage.readFileSync(inputData, exports.OLSKDiskDefaultTextEncoding());
@@ -134,11 +134,11 @@ exports.OLSKDiskWorkspaceTestingFolderName = function() {
 
 exports.OLSKDiskWorkspaceTestingFolderSubfolderNameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	if (inputData === '') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	return ['test', inputData].join('.').replace(/\./g, '-');
@@ -154,7 +154,7 @@ exports.OLSKDiskDefaultTextEncoding = function() {
 
 exports.OLSKDiskSafeBasenameFor = function(inputData) {
 	if (typeof inputData !== 'string') {
-		throw new Error('OLSKErrorInputInvalid');
+		throw new Error('OLSKErrorInputNotValid');
 	}
 
 	return inputData.replace(/[\.,;:\*\?\|_<>\\\/\"\'\“\”\‘\’\«\»]/g, ' ').split(/\s/).filter(function(e) {

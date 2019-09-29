@@ -66,13 +66,13 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 	it('throws if not string', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskCreateFolder(null);
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('throws if real file', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskCreateFolder(mainModule.OLSKDiskWriteFile(kTesting.StubRoot('alfa'), ''));
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns inputData', function() {
@@ -95,7 +95,7 @@ describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 	it('throws if not string', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskDeleteFolder(null);
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns inputData', function() {
@@ -117,13 +117,13 @@ describe('OLSKDiskWriteFile', function testOLSKDiskWriteFile() {
 	it('throws if param1 not string', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskWriteFile(null, '');
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('throws if param2 not string', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskWriteFile('', null);
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns param1', function() {
@@ -156,13 +156,13 @@ describe('OLSKDiskReadFile', function testOLSKDiskReadFile() {
 	it('throws if not string', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskReadFile(null);
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('throws if not real path', function() {
 		assert.throws(function () {
 			mainModule.OLSKDiskReadFile('alfa.txt');
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns content', function() {
@@ -216,13 +216,13 @@ describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDisk
 	it('throws error if not string', function() {
 		assert.throws(function() {
 			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor(null);
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('throws error if empty', function() {
 		assert.throws(function() {
 			mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('');
-		}, /OLSKErrorInputInvalid/);
+		}, /OLSKErrorInputNotValid/);
 	});
 
 	it('returns string', function() {
