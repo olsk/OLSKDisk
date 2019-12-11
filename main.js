@@ -167,6 +167,7 @@ const mod = {
 	OLSKDiskStandardIgnorePattern () {
 		return /.*(\.git|DS_Store|node_modules|vendor|__\w+)\/.*/i;
 	},
+
 };
 
 Object.assign(exports, mod);
