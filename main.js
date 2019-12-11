@@ -165,7 +165,7 @@ exports.OLSKDiskSafeBasenameFor = function(inputData) {
 const mod = {
 
 	OLSKDiskStandardIgnorePattern () {
-		return /.*(\.git|DS_Store|node_modules|vendor|__)\/.*/i;
+		return /.*(\.git|DS_Store|node_modules|vendor|__\w+)\/.*/i;
 	},
 };
 
