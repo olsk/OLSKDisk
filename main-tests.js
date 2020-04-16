@@ -17,7 +17,7 @@ const kTesting = {
 	},
 };
 
-describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
+describe('OLSKDiskIsRealFolderPath', function test_OLSKDiskIsRealFolderPath() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -37,7 +37,7 @@ describe('OLSKDiskIsRealFolderPath', function testOLSKDiskIsRealFolderPath() {
 
 });
 
-describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
+describe('OLSKDiskIsRealFilePath', function test_OLSKDiskIsRealFilePath() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -57,7 +57,7 @@ describe('OLSKDiskIsRealFilePath', function testOLSKDiskIsRealFilePath() {
 
 });
 
-describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
+describe('OLSKDiskCreateFolder', function test_OLSKDiskCreateFolder() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -86,7 +86,7 @@ describe('OLSKDiskCreateFolder', function testOLSKDiskCreateFolder() {
 
 });
 
-describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
+describe('OLSKDiskDeleteFolder', function test_OLSKDiskDeleteFolder() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -108,7 +108,7 @@ describe('OLSKDiskDeleteFolder', function testOLSKDiskDeleteFolder() {
 
 });
 
-describe('OLSKDiskWriteFile', function testOLSKDiskWriteFile() {
+describe('OLSKDiskWriteFile', function test_OLSKDiskWriteFile() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -147,7 +147,7 @@ describe('OLSKDiskWriteFile', function testOLSKDiskWriteFile() {
 
 });
 
-describe('OLSKDiskReadFile', function testOLSKDiskReadFile() {
+describe('OLSKDiskReadFile', function test_OLSKDiskReadFile() {
 
 	beforeEach(function() {
 		mainModule.OLSKDiskDeleteFolder(kTesting.StubRoot());
@@ -171,7 +171,7 @@ describe('OLSKDiskReadFile', function testOLSKDiskReadFile() {
 
 });
 
-describe('OLSKDiskAppFolderName', function testOLSKDiskAppFolderName() {
+describe('OLSKDiskAppFolderName', function test_OLSKDiskAppFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskAppFolderName(), 'os-app');
@@ -179,7 +179,7 @@ describe('OLSKDiskAppFolderName', function testOLSKDiskAppFolderName() {
 
 });
 
-describe('OLSKDiskCacheFolderName', function testOLSKDiskCacheFolderName() {
+describe('OLSKDiskCacheFolderName', function test_OLSKDiskCacheFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskCacheFolderName(), 'os-cache');
@@ -187,7 +187,7 @@ describe('OLSKDiskCacheFolderName', function testOLSKDiskCacheFolderName() {
 
 });
 
-describe('OLSKDiskDataFolderName', function testOLSKDiskDataFolderName() {
+describe('OLSKDiskDataFolderName', function test_OLSKDiskDataFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskDataFolderName(), 'os-data');
@@ -195,7 +195,7 @@ describe('OLSKDiskDataFolderName', function testOLSKDiskDataFolderName() {
 
 });
 
-describe('OLSKDiskPublicFolderName', function testOLSKDiskPublicFolderName() {
+describe('OLSKDiskPublicFolderName', function test_OLSKDiskPublicFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskPublicFolderName(), 'os-public');
@@ -203,7 +203,7 @@ describe('OLSKDiskPublicFolderName', function testOLSKDiskPublicFolderName() {
 
 });
 
-describe('OLSKDiskWorkspaceTestingFolderName', function testOLSKDiskWorkspaceTestingFolderName() {
+describe('OLSKDiskWorkspaceTestingFolderName', function test_OLSKDiskWorkspaceTestingFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingFolderName(), 'os-workspace-testing');
@@ -211,7 +211,7 @@ describe('OLSKDiskWorkspaceTestingFolderName', function testOLSKDiskWorkspaceTes
 
 });
 
-describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDiskWorkspaceTestingFolderSubfolderNameFor() {
+describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function test_OLSKDiskWorkspaceTestingFolderSubfolderNameFor() {
 
 	it('throws error if not string', function() {
 		assert.throws(function() {
@@ -232,7 +232,7 @@ describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function testOLSKDisk
 
 });
 
-describe('OLSKDiskDefaultTextEncoding', function testOLSKDiskDefaultTextEncoding() {
+describe('OLSKDiskDefaultTextEncoding', function test_OLSKDiskDefaultTextEncoding() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskDefaultTextEncoding(), 'utf8');
@@ -240,7 +240,7 @@ describe('OLSKDiskDefaultTextEncoding', function testOLSKDiskDefaultTextEncoding
 
 });
 
-describe('OLSKDiskSafeBasenameFor', function testOLSKDiskSafeBasenameFor() {
+describe('OLSKDiskSafeBasenameFor', function test_OLSKDiskSafeBasenameFor() {
 
 	it('throws if not string', function() {
 		assert.throws(function() {
