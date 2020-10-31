@@ -107,12 +107,6 @@ exports.OLSKDiskAppFolderName = function() {
 	return 'os-app';
 };
 
-//_ OLSKDiskDataFolderName
-
-exports.OLSKDiskDataFolderName = function() {
-	return 'os-data';
-};
-
 //_ OLSKDiskPublicFolderName
 
 exports.OLSKDiskPublicFolderName = function() {

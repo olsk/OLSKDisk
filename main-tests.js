@@ -178,14 +178,6 @@ describe('OLSKDiskAppFolderName', function test_OLSKDiskAppFolderName() {
 
 });
 
-describe('OLSKDiskDataFolderName', function test_OLSKDiskDataFolderName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskDataFolderName(), 'os-data');
-	});
-
-});
-
 describe('OLSKDiskPublicFolderName', function test_OLSKDiskPublicFolderName() {
 
 	it('returns constant', function() {
