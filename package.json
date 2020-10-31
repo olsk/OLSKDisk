@@ -1,7 +1,4 @@
 {
   "name": "OLSKDisk",
-  "main": "main.js",
-  "dependencies": {
-    "mkdirp": "latest"
-  }
+  "main": "main.js"
 }

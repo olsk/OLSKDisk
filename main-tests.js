@@ -9,7 +9,6 @@ const assert = require('assert');
 const mainModule = require('./main');
 
 const pathPackage = require('path');
-const mkdirpPackage = require('mkdirp');
 
 const kTesting = {
 	StubRoot: function (inputData) {

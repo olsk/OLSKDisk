@@ -6,7 +6,6 @@
 
 const fsPackage = require('fs');
 const pathPackage = require('path');
-const mkdirpPackage = require('mkdirp');
 
 //_ OLSKDiskIsRealFolderPath
 
@@ -40,7 +39,9 @@ exports.OLSKDiskCreateFolder = function(inputData) {
 	}
 
 	if (!fsPackage.existsSync(inputData)) {
-		mkdirpPackage.sync(inputData);
+		fsPackage.mkdirSync(inputData, {
+			recursive: true,
+		});
 	}
 
 	return inputData;
