@@ -178,14 +178,6 @@ describe('OLSKDiskAppFolderName', function test_OLSKDiskAppFolderName() {
 
 });
 
-describe('OLSKDiskCacheFolderName', function test_OLSKDiskCacheFolderName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskCacheFolderName(), 'os-cache');
-	});
-
-});
-
 describe('OLSKDiskDataFolderName', function test_OLSKDiskDataFolderName() {
 
 	it('returns constant', function() {

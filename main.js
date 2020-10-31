@@ -107,12 +107,6 @@ exports.OLSKDiskAppFolderName = function() {
 	return 'os-app';
 };
 
-//_ OLSKDiskCacheFolderName
-
-exports.OLSKDiskCacheFolderName = function() {
-	return 'os-cache';
-};
-
 //_ OLSKDiskDataFolderName
 
 exports.OLSKDiskDataFolderName = function() {
