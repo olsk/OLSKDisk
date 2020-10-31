@@ -12,7 +12,7 @@ const pathPackage = require('path');
 
 const kTesting = {
 	StubRoot: function (inputData) {
-		return pathPackage.join(mainModule.OLSKDiskWorkspaceTestingFolderName(), mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os.filesystem'), inputData || '');
+		return pathPackage.join(__dirname, '__testing', mainModule.OLSKDiskWorkspaceTestingFolderSubfolderNameFor('os.filesystem'), inputData || '');
 	},
 };
 
@@ -182,14 +182,6 @@ describe('OLSKDiskPublicFolderName', function test_OLSKDiskPublicFolderName() {
 
 	it('returns constant', function() {
 		assert.strictEqual(mainModule.OLSKDiskPublicFolderName(), 'os-public');
-	});
-
-});
-
-describe('OLSKDiskWorkspaceTestingFolderName', function test_OLSKDiskWorkspaceTestingFolderName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskWorkspaceTestingFolderName(), 'os-workspace-testing');
 	});
 
 });

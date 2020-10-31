@@ -113,12 +113,6 @@ exports.OLSKDiskPublicFolderName = function() {
 	return 'os-public';
 };
 
-//_ OLSKDiskWorkspaceTestingFolderName
-
-exports.OLSKDiskWorkspaceTestingFolderName = function() {
-	return 'os-workspace-testing';
-};
-
 //_ OLSKDiskWorkspaceTestingFolderSubfolderNameFor
 
 exports.OLSKDiskWorkspaceTestingFolderSubfolderNameFor = function(inputData) {
