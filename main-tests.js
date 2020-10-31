@@ -207,14 +207,6 @@ describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function test_OLSKDis
 
 });
 
-describe('OLSKDiskDefaultTextEncoding', function test_OLSKDiskDefaultTextEncoding() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskDefaultTextEncoding(), 'utf8');
-	});
-
-});
-
 describe('OLSKDiskSafeBasenameFor', function test_OLSKDiskSafeBasenameFor() {
 
 	it('throws if not string', function() {

@@ -98,7 +98,7 @@ exports.OLSKDiskReadFile = function(inputData) {
 		throw new Error('OLSKErrorInputNotValid');
 	}
 
-	return fsPackage.readFileSync(inputData, exports.OLSKDiskDefaultTextEncoding());
+	return fsPackage.readFileSync(inputData, 'utf8');
 };
 
 //_ OLSKDiskAppFolderName
@@ -125,12 +125,6 @@ exports.OLSKDiskWorkspaceTestingFolderSubfolderNameFor = function(inputData) {
 	}
 
 	return ['test', inputData].join('.').replace(/\./g, '-');
-};
-
-//_ OLSKDiskDefaultTextEncoding
-
-exports.OLSKDiskDefaultTextEncoding = function() {
-	return 'utf8';
 };
 
 //_ OLSKDiskSafeBasenameFor
