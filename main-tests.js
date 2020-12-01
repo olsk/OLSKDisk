@@ -1,9 +1,3 @@
-/*!
- * OLSKDisk
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
-
 const assert = require('assert');
 
 const mainModule = require('./main');

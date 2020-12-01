@@ -1,9 +1,3 @@
-/*!
- * OLSKDisk
- * Copyright(c) 2018 Rosano Coutinho
- * MIT Licensed
- */
-
 const fsPackage = require('fs');
 const pathPackage = require('path');
 
