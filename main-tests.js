@@ -172,14 +172,6 @@ describe('OLSKDiskAppFolderName', function test_OLSKDiskAppFolderName() {
 
 });
 
-describe('OLSKDiskPublicFolderName', function test_OLSKDiskPublicFolderName() {
-
-	it('returns constant', function() {
-		assert.strictEqual(mainModule.OLSKDiskPublicFolderName(), 'os-public');
-	});
-
-});
-
 describe('OLSKDiskWorkspaceTestingFolderSubfolderNameFor', function test_OLSKDiskWorkspaceTestingFolderSubfolderNameFor() {
 
 	it('throws error if not string', function() {
