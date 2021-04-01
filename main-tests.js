@@ -164,6 +164,81 @@ describe('OLSKDiskReadFile', function test_OLSKDiskReadFile() {
 
 });
 
+describe('OLSKDiskWrite', function test_OLSKDiskWrite() {
+
+	beforeEach(function() {
+		mod.OLSKDiskDeleteFolder(kTesting.StubRoot());
+	});
+
+	it('throws if param1 not string', function() {
+		assert.throws(function () {
+			mod.OLSKDiskWrite(null, Math.random().toString());
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('throws if param2 not string', function() {
+		assert.throws(function () {
+			mod.OLSKDiskWrite(Math.random().toString(), null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns param2', function() {
+		const item = Math.random().toString();
+		assert.strictEqual(mod.OLSKDiskWrite(kTesting.StubRoot(Math.random().toString()), item), item);
+	});
+
+	it('creates parent folders if not real', function() {
+		const folder = Math.random().toString();
+		const path = kTesting.StubRoot(folder + '/' + Math.random().toString());
+
+		assert.strictEqual(mod.OLSKDiskIsRealFolderPath(kTesting.StubRoot(folder)), false);
+
+		mod.OLSKDiskWrite(path, Math.random().toString());
+		assert.strictEqual(mod.OLSKDiskIsRealFolderPath(pathPackage.dirname(path)), true);
+	});
+
+	it('creates file if not real', function() {
+		const item = kTesting.StubRoot(Math.random().toString());
+		assert.strictEqual(mod.OLSKDiskIsRealFilePath(item), false);
+
+		mod.OLSKDiskWrite(item, Math.random().toString());
+		assert.strictEqual(mod.OLSKDiskIsRealFilePath(item), true);
+	});
+
+	it('updates content', function() {
+		const item = kTesting.StubRoot(Math.random().toString());
+
+		mod.OLSKDiskWrite(item, 'bravo');
+		assert.strictEqual(mod.OLSKDiskReadFile(item), 'bravo');
+
+		mod.OLSKDiskWrite(item, 'charlie');
+		assert.strictEqual(mod.OLSKDiskReadFile(item), 'charlie');
+	});
+
+});
+
+describe('OLSKDiskRead', function test_OLSKDiskRead() {
+
+	beforeEach(function() {
+		mod.OLSKDiskDeleteFolder(kTesting.StubRoot());
+	});
+
+	it('throws if not string', function() {
+		assert.throws(function () {
+			mod.OLSKDiskRead(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns null if not real path', function() {
+		assert.strictEqual(mod.OLSKDiskRead(Math.random().toString()), null);
+	});
+
+	it('returns content', function() {
+		assert.strictEqual(mod.OLSKDiskRead(mod.OLSKDiskWriteFile(kTesting.StubRoot('alfa.txt'), 'bravo')), 'bravo');
+	});
+
+});
+
 describe('OLSKDiskAppFolderName', function test_OLSKDiskAppFolderName() {
 
 	it('returns constant', function() {

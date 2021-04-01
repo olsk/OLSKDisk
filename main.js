@@ -95,6 +95,38 @@ exports.OLSKDiskReadFile = function(inputData) {
 	return fsPackage.readFileSync(inputData, 'utf8');
 };
 
+//_ OLSKDiskWrite
+
+exports.OLSKDiskWrite = function(param1, param2) {
+	if (typeof param1 !== 'string') {
+		throw new Error('OLSKErrorInputNotValid');
+	}
+
+	if (typeof param2 !== 'string') {
+		throw new Error('OLSKErrorInputNotValid');
+	}
+
+	exports.OLSKDiskCreateFolder(pathPackage.dirname(param1));
+
+	fsPackage.writeFileSync(param1, param2);
+
+	return param2;
+};
+
+//_ OLSKDiskRead
+
+exports.OLSKDiskRead = function(inputData) {
+	if (typeof inputData !== 'string') {
+		throw new Error('OLSKErrorInputNotValid');
+	}
+
+	if (!exports.OLSKDiskIsRealFilePath(inputData)) {
+		return null;
+	}
+
+	return fsPackage.readFileSync(inputData, 'utf8');
+};
+
 //_ OLSKDiskAppFolderName
 
 exports.OLSKDiskAppFolderName = function() {
