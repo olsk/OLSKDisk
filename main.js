@@ -165,6 +165,22 @@ const mod = {
 		return /.*(\.git|DS_Store|node_modules|vendor|__\w+)\/.*/i;
 	},
 
+	OLSKDiskOpen (inputData) {
+		if (typeof inputData !== 'string') {
+			throw new Error('OLSKErrorInputNotValid');
+		}
+
+		const _mod = process.env.npm_lifecycle_script === 'olsk-spec' ? this : mod;
+
+		_mod._DataFoilOpen(inputData);
+
+		return inputData;
+	},
+
+	// DATA
+
+	_DataFoilOpen: require('open'),
+
 };
 
 Object.assign(exports, mod);

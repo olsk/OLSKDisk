@@ -349,3 +349,33 @@ describe('OLSKDiskSafeBasenameFor', function test_OLSKDiskSafeBasenameFor() {
 	});
 
 });
+
+describe('OLSKDiskOpen', function test_OLSKDiskOpen() {
+
+	const _OLSKDiskOpen = function (inputData, params = {}) {
+		return Object.assign(Object.assign({}, mod), {
+			_DataFoilOpen: (function () {}),
+		}, params).OLSKDiskOpen(inputData);
+	};
+
+	it('throws if not string', function() {
+		throws(function () {
+			_OLSKDiskOpen(null);
+		}, /OLSKErrorInputNotValid/);
+	});
+
+	it('returns inputData', function() {
+		const item = Math.random().toString();
+		deepEqual(_OLSKDiskOpen(item), item);
+	});
+
+	it('calls _DataFoilOpen', function() {
+		const item = Math.random().toString();
+		deepEqual(uCapture(function (_DataFoilOpen) {
+			_OLSKDiskOpen(item, {
+				_DataFoilOpen,
+			})
+		}), [item]);
+	});
+
+});
