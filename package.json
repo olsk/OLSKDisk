@@ -1,4 +1,7 @@
 {
   "name": "OLSKDisk",
-  "main": "main.js"
+  "main": "main.js",
+  "dependencies": {
+    "open": "latest"
+  }
 }
