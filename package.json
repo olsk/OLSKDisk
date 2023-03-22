@@ -2,6 +2,6 @@
   "name": "OLSKDisk",
   "main": "main.js",
   "dependencies": {
-    "open": "latest"
+    "open": "8.x"
   }
 }
