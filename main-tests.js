@@ -379,3 +379,31 @@ describe('OLSKDiskOpen', function test_OLSKDiskOpen() {
 	});
 
 });
+
+describe('OLSKDiskStandardIgnoreItems', function test_OLSKDiskStandardIgnoreItems() {
+
+	it('returns array', function() {
+		deepEqual(mod.OLSKDiskStandardIgnoreItems(), [
+			'DS_Store',
+			'node_modules',
+			'vendor',
+		]);
+	});
+
+});
+
+describe('OLSKDiskStandardIgnoreGlob', function test_OLSKDiskStandardIgnoreGlob() {
+
+	it('returns string', function() {
+		deepEqual(mod.OLSKDiskStandardIgnoreGlob(), `**/+(.git|${ mod.OLSKDiskStandardIgnoreItems().join('|') }|__*)/**`);
+	});
+
+});
+
+describe('OLSKDiskStandardIgnorePattern', function test_OLSKDiskStandardIgnorePattern() {
+
+	it('returns regex', function() {
+		deepEqual(mod.OLSKDiskStandardIgnorePattern(), /.*(\.git|DS_Store|node_modules|vendor|__\w+)\/.*/i);
+	});
+
+});

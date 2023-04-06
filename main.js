@@ -161,8 +161,20 @@ exports.OLSKDiskSafeBasenameFor = function(inputData) {
 
 const mod = {
 
+	OLSKDiskStandardIgnoreItems () {
+		return [
+			'DS_Store',
+			'node_modules',
+			'vendor',
+		]
+	},
+
+	OLSKDiskStandardIgnoreGlob () {
+		return `**/+(.git|${ mod.OLSKDiskStandardIgnoreItems().join('|') }|__*)/**`;
+	},
+
 	OLSKDiskStandardIgnorePattern () {
-		return /.*(\.git|DS_Store|node_modules|vendor|__\w+)\/.*/i;
+		return new RegExp(`.*(\\.git|${ mod.OLSKDiskStandardIgnoreItems().join('|') }|__\\w+)/.*`, 'i')
 	},
 
 	OLSKDiskOpen (inputData) {
